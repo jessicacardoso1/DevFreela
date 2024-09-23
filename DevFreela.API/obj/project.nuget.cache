@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "SDd4rC37uPojBhQcmncaCp/Fj1pDIx7sepjJrDmL5efsvXretz5suIeVnbuCMF3kCSz5T9NK8dMLea7UdGHfyA==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\fs\\source\\repos\\DevFreela\\DevFreela.API\\DevFreela.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\fs\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.9\\microsoft.aspnetcore.openapi.7.0.9.nupkg.sha512",
+    "C:\\Users\\fs\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Unable to find package Swashbuckle.AspssNetCore. No packages exist with this id in source(s): C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs, Microsoft Visual Studio Offline Packages, nuget.org",
+      "libraryId": "Swashbuckle.AspssNetCore",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
+}
