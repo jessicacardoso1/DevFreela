@@ -45,7 +45,7 @@
               "target": "Package",
               "version": "[7.0.9, )"
             },
-            "Swashbuckle.AspssNetCore": {
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
             }
