@@ -396,3 +396,16 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Ignore arquivos de backup
+*.bak
+
+# Ignore arquivos de configuração local
+*.http
+
+# Outras regras para binários, pacotes e outros arquivos temporários
+bin/
+obj/
+*.user
+*.suo
+*.log
