@@ -11,43 +11,44 @@ namespace DevFreela.API.Controllers
     {
         private readonly FreelanceTotalCostConfig _config;
         private readonly IConfigService _configService;
-        public ProjectsController(IOptions<FreelanceTotalCostConfig> options, IConfigService configService) {
+        public ProjectsController(
+           IOptions<FreelanceTotalCostConfig> options,
+           IConfigService configService)
+        {
             _config = options.Value;
             _configService = configService;
 
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string search = "")
         {
-            return Ok();
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(string search = "")
-        {
-            //return not found()
             return Ok(_configService.GetValue());
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] CreateProjectModel model)
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
         {
-            if (model.TotalCost < _config.Minimum || model.TotalCost > _config.Maximum )
+            //return not found()
+            throw new Exception();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Post(CreateProjectInputModel model)
+        {
+            if (model.TotalCost < _config.Minimum || model.TotalCost > _config.Maximum)
             {
                 return BadRequest("Numero fora dos limites.");
             }
-            return CreatedAtAction(nameof(GetById), new { search = model.Title }, model);
+            return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
         }
         //PUT api/projects/1
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateProjectModel model)
+        public IActionResult Put(int id, UpdateProjectInputModel model)
         {
-            if (model.Description.Length > 50)
-            {
-                return BadRequest();
-            }
-            model.Id = id;
+        	
             return NoContent();
         }
 
@@ -72,7 +73,7 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpPost("{id}/comments")]
-        public IActionResult Comments(int id, CreateProjectCommentInputModel model)
+        public IActionResult PostComment(int id, CreateProjectCommentInputModel model)
         {
             return Ok();
         }
