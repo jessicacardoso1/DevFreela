@@ -31,7 +31,7 @@ namespace DevFreela.API.Controllers
 
             var model = projects.Select(ProjectItemViewModel.FromEntity).ToList();
 
-            return Ok(projects);
+            return Ok(model);
         }
 
         // GET api/projects/1234
@@ -45,7 +45,7 @@ namespace DevFreela.API.Controllers
                 .SingleOrDefault(p => p.Id == id);
 
             var model = ProjectViewModel.FromEntity(projects);
-            return Ok(projects);
+            return Ok(model);
         }
 
         // POST api/projects
