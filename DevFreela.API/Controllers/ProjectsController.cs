@@ -1,10 +1,10 @@
-﻿using DevFreela.API.Entities;
-using DevFreela.API.Models;
-using DevFreela.API.Persistence;
+﻿using DevFreela.Core.Entities;
+using DevFreela.Infrastructure.Persistence;
 using DevFreela.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using DevFreela.Application.Models;
 
 namespace DevFreela.API.Controllers
 {
@@ -22,12 +22,14 @@ namespace DevFreela.API.Controllers
 
         // GET api/projects?search=crm
         [HttpGet]
-        public IActionResult Get(string search = "")
+        public IActionResult Get(string search = "", int page = 0, int size = 3)
         {
             var projects = _context.Projects
                 .Include(p => p.Client)
                 .Include(p => p.Freelancer)
                 .Where(p => !p.IsDeleted && (search == "" || p.Title.Contains(search)) || p.Description.Contains(search))
+                .Skip(page * size)
+                .Take(size)
                 .ToList();
 
             var model = projects.Select(ProjectItemViewModel.FromEntity).ToList();
