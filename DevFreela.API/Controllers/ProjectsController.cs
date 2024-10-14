@@ -1,9 +1,4 @@
-﻿using DevFreela.Core.Entities;
-using DevFreela.Infrastructure.Persistence;
-using DevFreela.API.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Mvc;
 using DevFreela.Application.Models;
 using DevFreela.Application.Services;
 
@@ -14,12 +9,9 @@ namespace DevFreela.API.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly FreelanceTotalCostConfig _config;
-        private readonly IConfigService _configService;
-        private readonly DevFreelaDbContext _context;
         private readonly IProjectService _service;
-        public ProjectsController(DevFreelaDbContext context, IProjectService service)
+        public ProjectsController(IProjectService service)
         {
-            _context = context;
             _service = service;
 
         }
