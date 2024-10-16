@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DevFreela.Application.Models;
 using DevFreela.Application.Services;
+using MediatR;
 
 namespace DevFreela.API.Controllers
 {
@@ -10,9 +11,12 @@ namespace DevFreela.API.Controllers
     {
         private readonly FreelanceTotalCostConfig _config;
         private readonly IProjectService _service;
-        public ProjectsController(IProjectService service)
+        private readonly IMediator _mediator;
+        public ProjectsController(IProjectService service, IMediator mediator)
         {
             _service = service;
+            _mediator = mediator;
+
 
         }
 

@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\StartProject\" />
-    <Folder Include="Queries\GetAllProjects\" />
     <Folder Include="Queries\GetProjectById\" />
   </ItemGroup>
 
