@@ -9,11 +9,13 @@ namespace DevFreela.Application.Services
 {
     public interface IUserService
     {
-        ResultViewModel<ProjectViewModel> GetById(int id);
+        ResultViewModel<List<UserViewModel>> GetAll(string search = "");
 
-        ResultViewModel<ProjectViewModel> Insert(CreateUserInputModel model);
-        ResultViewModel<ProjectViewModel> Delete(int id);
-        ResultViewModel<ProjectViewModel> Update(CreateUserInputModel model);
-        ResultViewModel<ProjectViewModel> PostSkills(int id, UserSkillsInputModel model);
+        ResultViewModel<UserViewModel> GetById(int id);
+
+        ResultViewModel<int> Insert(CreateUserInputModel model);
+        ResultViewModel Delete(int id);
+        ResultViewModel Update(UpdateUserInputModel model);
+        ResultViewModel InsertSkills(int id, UserSkillsInputModel model);
     }
 }

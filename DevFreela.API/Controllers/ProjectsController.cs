@@ -24,8 +24,6 @@ namespace DevFreela.API.Controllers
         {
             _service = service;
             _mediator = mediator;
-
-
         }
 
         // GET api/projects?search=crm

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevFreela.Application.Commands.DeleteProject
 {
-    internal class DeleteProjectHandler : IRequestHandler<DeleteProjectCommand, ResultViewModel>
+    public class DeleteProjectHandler : IRequestHandler<DeleteProjectCommand, ResultViewModel>
     {
         private readonly DevFreelaDbContext _context;
         public DeleteProjectHandler(DevFreelaDbContext context)

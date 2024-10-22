@@ -4,6 +4,7 @@ namespace DevFreela.Core.Entities
 {
     public class User : BaseEntity
     {
+        protected User() { }
         public User(string fullName, string email, DateTime birthDate) : base()
         {
             FullName = fullName;
@@ -26,5 +27,11 @@ namespace DevFreela.Core.Entities
 
         public List<ProjectComment> Comments { get; private set; }
 
+        public void Update(string fullName, string email, DateTime birthDate)
+        {
+            FullName = fullName;
+            Email = email;
+            BirthDate = birthDate;
+        }
     }
 }

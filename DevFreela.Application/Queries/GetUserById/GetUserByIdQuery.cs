@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Application.Queries.GetProjectById
+namespace DevFreela.Application.Queries.GetUserById
 {
-    public class GetProjectByIdQuery : IRequest<ResultViewModel<ProjectViewModel>>
+    public class GetUserByIdQuery : IRequest<ResultViewModel<UserViewModel>>
     {
-        public GetProjectByIdQuery(int id)
+        public GetUserByIdQuery(int id)
         {
             Id = id;
         }
