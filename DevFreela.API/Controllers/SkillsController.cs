@@ -3,6 +3,14 @@ using DevFreela.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DevFreela.Application.Models;
+using MediatR;
+using DevFreela.Application.Queries.GetAllSkills;
+using DevFreela.Application.Commands.InsertSkillsUser;
+using DevFreela.Application.Queries.GetSkillById;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using DevFreela.Application.Commands.UpdateSkill;
+using DevFreela.Application.Commands.DeleteProject;
+using DevFreela.Application.Commands.DeleteSkill;
 
 namespace DevFreela.API.Controllers
 {
@@ -11,35 +19,73 @@ namespace DevFreela.API.Controllers
     public class SkillsController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-        public SkillsController(DevFreelaDbContext context)
+        private readonly IMediator _mediator;
+        public SkillsController(DevFreelaDbContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var skills = _context.Skills.
-                ToList();
+            var query = new GetAllSkillsQuery();
+            var skills = await _mediator.Send(query);
 
-            var model = skills.Select(SkIllViewModel.FromEntity).ToList();
             return Ok(skills);
         }
 
         [HttpPost]
-        public IActionResult Post(CreateSkillInputModel model)
+        public async Task<IActionResult> Post(InsertSkillsUserCommand command)
         {
-            var skill = new Skill(model.Description);
+            var result = await _mediator.Send(command);
 
-            _context.Skills.Add(skill);
-            _context.SaveChanges();
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
+        }
+
+        [HttpPut]
+        public IActionResult Put(UpdateSkillInputModel model)
+        {
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+
+            var result = await _mediator.Send(new GetSkillByIdQuery(id));
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteSkillCommand(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
 
             return NoContent();
         }
 
-        [HttpPut]
-        public IActionResult Put(UpdateSkillInputModel model) {
-            return Ok();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, UpdateSkillCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
     }
 

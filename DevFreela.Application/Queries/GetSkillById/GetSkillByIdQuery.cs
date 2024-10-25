@@ -6,11 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Application.Commands.InsertSkillsUser
+namespace DevFreela.Application.Queries.GetSkillById
 {
-    public class InsertSkillsUserCommand : IRequest<ResultViewModel<int>>
+    public class GetSkillByIdQuery : IRequest<ResultViewModel<SkIllViewModel>>
     {
-        public int[] SkillIds { get; set; }
+        public GetSkillByIdQuery(int id)
+        {
+            Id = id;
+        }
         public int Id { get; set; }
     }
 }
