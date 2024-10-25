@@ -36,6 +36,11 @@ namespace DevFreela.API.Controllers
 
             return NoContent();
         }
+
+        [HttpPut]
+        public IActionResult Put(UpdateSkillInputModel model) {
+            return Ok();
+        }
     }
 
 }
