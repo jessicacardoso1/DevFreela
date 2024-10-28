@@ -1,60 +1,60 @@
 # DevFreela
 
-## 📑 Descrição
-**DevFreela** é uma API desenvolvida em ASP.NET Core para conectar clientes e freelancers no gerenciamento de projetos. A API oferece uma plataforma escalável para criação e administração de projetos. Este projeto faz parte de um desafio da mentoria conduzida por Luis Felipe em parceria com a Next Wave Education. 🚀
+## 📑 Description
+**DevFreela** is an API built with ASP.NET Core to connect clients and freelancers for project management. The API provides a scalable platform for creating and managing projects. This project is part of a challenge from the mentorship program led by Luis Felipe in partnership with Next Wave Education. 🚀
 
 ---
 
-## 🚀 Funcionalidades
+## 🚀 Features
 
-### 📌 Principais Entidades
-- **Projects**: Gerenciamento de projetos com detalhes, status e progresso.
-- **Skills**: Habilidades específicas relacionadas aos usuários e projetos.
-- **Users**: Gestão de perfis de clientes e freelancers.
+### 📌 Key Entities
+- **Projects**: Manage projects with details, status, and progress tracking.
+- **Skills**: Specific skills associated with users and projects.
+- **Users**: Manage profiles for clients and freelancers.
 
-### ⚙️ Funcionalidades Disponíveis
-- **Gerenciamento de Projetos**: Criação, edição, exclusão, início e conclusão de projetos.
-- **Comentários**: Controle e monitoramento de comentários nos projetos.
-- **Atribuição de Habilidades**: Habilidades específicas para cada usuário.
+### ⚙️ Available Functionalities
+- **Project Management**: Create, edit, delete, start, and complete projects.
+- **Comments**: Control and monitor comments on projects.
+- **Skill Assignment**: Assign specific skills to each user.
 
-### 📝 Documentação
-- A API está documentada e acessível via **Swagger**, facilitando a integração e o entendimento das rotas e operações disponíveis.
-
----
-
-## 🛠️ Implementações Técnicas
-
-- **Entity Framework Core**: Configuração da camada de persistência com o Entity Framework Core, utilizando um banco de dados MS SQL Server no Docker.
-- **Padrão Clean Code**: Estruturação do código seguindo boas práticas para tornar o projeto claro e de fácil manutenção.
-- **CQRS (Command Query Responsibility Segregation)**: Separação de responsabilidades para leitura e escrita de dados, implementando o padrão CQRS para maior eficiência e clareza.
+### 📝 Documentation
+- API documentation is available through **Swagger**, making it easy to integrate and understand the available routes and operations.
 
 ---
 
-## 📈 Próximos Passos
+## 🛠️ Technical Implementations
 
-### Em Desenvolvimento
-- **Padrão Repository**: Implementação de repositórios para gerenciar as operações de dados das entidades `Projects`, `Skills` e `Users`.
-- **Validação com FluentValidation**: Adição de validações de entrada utilizando o FluentValidation para garantir integridade e consistência de dados.
-
-### Futuras Melhorias
-- **Testes Unitários e de Integração**: Criação de testes para garantir a qualidade e robustez do código.
-- **Autenticação e Autorização**: Implementação de autenticação e autorização com JWT (JSON Web Tokens) para controle de acesso seguro.
+- **Entity Framework Core**: Configuring the persistence layer with Entity Framework Core, using an MS SQL Server database running on Docker.
+- **Clean Code Principles**: Structuring code with best practices for clear, maintainable projects.
+- **CQRS (Command Query Responsibility Segregation)**: Separating responsibilities for reading and writing data by implementing the CQRS pattern for improved efficiency and clarity.
 
 ---
 
-## 🧰 Tecnologias e Ferramentas
+## 📈 Next Steps
 
-- **ASP.NET Core**: Framework para a construção da API.
-- **Entity Framework Core**: ORM para gerenciamento de dados.
-- **Docker**: Contêiner para execução do banco de dados SQL Server.
-- **Swagger**: Documentação da API.
-- **IDE**: Visual Studio (experiência também com VS Code).
+### In Development
+- **Repository Pattern**: Implement repositories to manage data operations for the `Projects`, `Skills`, and `Users` entities.
+- **Validation with FluentValidation**: Add data entry validation using FluentValidation to ensure data integrity and consistency.
 
----
-
-## 👨‍💻 Sobre o Projeto
-Este é um desafio empolgante que possibilita a prática de conceitos fundamentais em desenvolvimento backend e arquitetura de APIs. O projeto está em constante evolução, com foco em aprendizado e aprimoramento contínuo!
+### Future Enhancements
+- **Unit and Integration Testing**: Develop tests to ensure code quality and robustness.
+- **Authentication and Authorization**: Implement authentication and authorization with JWT (JSON Web Tokens) for secure access control.
 
 ---
 
-💡 Fique à vontade para contribuir com sugestões, ideias ou relatórios de bugs! Vamos continuar crescendo juntos. 🚀
+## 🧰 Technologies and Tools
+
+- **ASP.NET Core**: Framework for building the API.
+- **Entity Framework Core**: ORM for data management.
+- **Docker**: Container for running the SQL Server database.
+- **Swagger**: API documentation.
+- **IDE**: Visual Studio (experience with VS Code as well).
+
+---
+
+## 👨‍💻 About the Project
+This is an exciting challenge that allows for hands-on practice with essential backend development concepts and API architecture. The project is constantly evolving, with a focus on continuous learning and improvement!
+
+---
+
+💡 Feel free to contribute with suggestions, ideas, or bug reports! Let's keep growing together. 🚀
