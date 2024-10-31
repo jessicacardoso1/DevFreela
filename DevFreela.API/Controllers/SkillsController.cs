@@ -43,12 +43,6 @@ namespace DevFreela.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
 
-        [HttpPut]
-        public IActionResult Put(UpdateSkillInputModel model)
-        {
-            return Ok();
-        }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
