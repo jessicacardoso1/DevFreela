@@ -3,7 +3,6 @@ using DevFreela.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DevFreela.Application.Models;
-using DevFreela.Application.Services;
 using MediatR;
 using Microsoft.AspNetCore.Components.Forms;
 using DevFreela.Application.Commands.InsertProject;
@@ -24,7 +23,6 @@ namespace DevFreela.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-        private readonly IProjectService _service;
         private readonly IMediator _mediator;
 
         public UsersController(DevFreelaDbContext context, IMediator mediator)
