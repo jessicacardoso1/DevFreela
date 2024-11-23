@@ -11,6 +11,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using DevFreela.Application.Commands.UpdateSkill;
 using DevFreela.Application.Commands.DeleteProject;
 using DevFreela.Application.Commands.DeleteSkill;
+using DevFreela.Application.Commands.InsertSkill;
 
 namespace DevFreela.API.Controllers
 {
@@ -18,11 +19,9 @@ namespace DevFreela.API.Controllers
     [Route("api/skills")]
     public class SkillsController : ControllerBase
     {
-        private readonly DevFreelaDbContext _context;
         private readonly IMediator _mediator;
-        public SkillsController(DevFreelaDbContext context, IMediator mediator)
+        public SkillsController(IMediator mediator)
         {
-            _context = context;
             _mediator = mediator;
         }
 
@@ -36,9 +35,14 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(InsertSkillsUserCommand command)
+        public async Task<IActionResult> Post(InsertSkillCommand command)
         {
             var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
