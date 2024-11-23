@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using DevFreela.Application.Models;
 using DevFreela.Core.Entities;
+using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using System;
@@ -11,21 +12,20 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.InsertSkillsUser
 {
-    public class InsertSkillsUserHandler : IRequestHandler<InsertSkillsUserCommand, ResultViewModel>
+    public class InsertSkillsUserHandler : IRequestHandler<InsertSkillsUserCommand, ResultViewModel<int>>
     {
-        private readonly DevFreelaDbContext _context;
-        public InsertSkillsUserHandler(DevFreelaDbContext context)
+        private readonly IUserRepository _repository;
+        public InsertSkillsUserHandler(IUserRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        public async Task<ResultViewModel> Handle(InsertSkillsUserCommand request, CancellationToken cancellationToken)
+        public async Task<ResultViewModel<int>> Handle(InsertSkillsUserCommand request, CancellationToken cancellationToken)
         {
-           var userSkils = request.SkillIds.Select(s => new UserSkill(request.Id, s)).ToList();
-           await _context.AddRangeAsync(userSkils);
-           await _context.SaveChangesAsync();
+            await _repository.PostSkills(request.Id, request.SkillIds.ToList());
 
-            return ResultViewModel.Success();
+            return ResultViewModel<int>.Success(request.Id);
         }
+
     }
 }

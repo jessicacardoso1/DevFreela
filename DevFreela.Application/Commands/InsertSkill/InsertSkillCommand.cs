@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.InsertSkill
 {
-    public class InsertSkillCommand : IRequest<ResultViewModel> {
+    public class InsertSkillCommand : IRequest<ResultViewModel<int>> {
         public string Description { get; set; }
         public Skill ToEntity()
             => new(Description);

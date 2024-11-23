@@ -1,5 +1,7 @@
 ﻿using DevFreela.Application.Models;
+using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.Persistence;
+using DevFreela.Infrastructure.Persistence.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,23 +13,22 @@ namespace DevFreela.Application.Commands.DeleteSkill
 {
     public class DeleteSkillHandler : IRequestHandler<DeleteSkillCommand, ResultViewModel>
     {
-        private readonly DevFreelaDbContext _context;
-        public DeleteSkillHandler(DevFreelaDbContext context)
+        private readonly ISkillRepository _repository;
+        public DeleteSkillHandler(ISkillRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
         public async Task<ResultViewModel> Handle(DeleteSkillCommand request, CancellationToken cancellationToken)
         {
-            var skill = _context.Skills.SingleOrDefault(s => s.Id == request.Id);
+            var skill = await _repository.GetById(request.Id);
 
             if (skill is null)
             {
-                return ResultViewModel.Error("Skill não encontrada");
+                return ResultViewModel<SkIllViewModel>.Error("Skill não encontrada");
             }
 
             skill.SetAsDeleted();
-            _context.Skills.Update(skill);
-            _context.SaveChanges();
+            await _repository.Update(skill);
 
             return ResultViewModel.Success();
         }

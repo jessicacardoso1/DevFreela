@@ -1,6 +1,8 @@
 ﻿using Azure.Core;
 using DevFreela.Application.Models;
+using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.Persistence;
+using DevFreela.Infrastructure.Persistence.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,16 +15,15 @@ namespace DevFreela.Application.Queries.GetSkillById
 {
     public class GetSkillByIdHandler : IRequestHandler<GetSkillByIdQuery, ResultViewModel<SkIllViewModel>>
     {
-        private readonly DevFreelaDbContext _context;
-        public GetSkillByIdHandler(DevFreelaDbContext context)
+        private readonly ISkillRepository _repository;
+        public GetSkillByIdHandler(ISkillRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<ResultViewModel<SkIllViewModel>> Handle(GetSkillByIdQuery request, CancellationToken cancellationToken)
         {
-            var skill = await _context.Skills
-                .SingleOrDefaultAsync(s => s.Id == request.Id);
+            var skill = await _repository.GetById(request.Id);
 
             if (skill is null)
             {

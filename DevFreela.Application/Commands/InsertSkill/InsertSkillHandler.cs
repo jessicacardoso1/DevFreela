@@ -1,5 +1,7 @@
 ﻿using DevFreela.Application.Models;
+using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.Persistence;
+using DevFreela.Infrastructure.Persistence.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,19 +12,18 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.InsertSkill
 {
-    public class InsertSkillHandler : IRequestHandler<InsertSkillCommand, ResultViewModel>
+    public class InsertSkillHandler : IRequestHandler<InsertSkillCommand, ResultViewModel<int>>
     {
-        private readonly DevFreelaDbContext _context;
-        public InsertSkillHandler(DevFreelaDbContext context)
+        private readonly ISkillRepository _repository;
+        public InsertSkillHandler(ISkillRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
-        public async Task<ResultViewModel> Handle(InsertSkillCommand request, CancellationToken cancellationToken)
+        public async Task<ResultViewModel<int>> Handle(InsertSkillCommand request, CancellationToken cancellationToken)
         {
             var skill = request.ToEntity();
 
-            _context.Skills.Add(skill);
-            _context.SaveChanges();
+            await _repository.Add(skill);
 
             return ResultViewModel<int>.Success(skill.Id);
         }
