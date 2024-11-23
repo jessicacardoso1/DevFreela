@@ -61,16 +61,6 @@ namespace DevFreela.Infrastructure.Persistence
                 .Entity<User>(e =>
                 {
                     e.HasKey(u => u.Id);
-
-                    //e.HasMany(u => u.OwnedProjects)
-                    //.WithOne(p => p.Client)
-                    //.HasForeignKey(p => p.IdClient)
-                    //.OnDelete(DeleteBehavior.Restrict);
-
-                    //e.HasMany(u => u.FreelanceProjects)
-                    //        .WithOne(p => p.Freelancer)
-                    //        .HasForeignKey(p => p.IdFreelancer);
-
                     e.HasMany(u => u.Skills)
                         .WithOne(us => us.User)
                         .HasForeignKey(us => us.IdUser)
