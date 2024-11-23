@@ -30,7 +30,7 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
         {
             var users = await _context.Users
               .Include(u => u.Skills)
-                 .ThenInclude(u => u.Skill)
+                 .ThenInclude(us => us.Skill)
               .Where(u => !u.IsDeleted).ToListAsync();
 
             return users;
@@ -38,18 +38,21 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
 
         public async Task<User?> GetById(int id)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .Include(u => u.Skills)
+                    .ThenInclude(us => us.Skill)
+                .SingleOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
 
-        //public Task<int> PostSkills(int id, UserSkill userSkill)
-        //{
-        //    //TODO
-        //    //var userSkils = _context.SkillIds.Select(s => new UserSkill(userSkill.Id, s)).ToList();
-        //    //await _context.AddRangeAsync(userSkils);
-        //    //await _context.SaveChangesAsync();
-        //}
+        public async Task PostSkills(int userId, List<int> skillIds)
+        {
+            var userSkills = skillIds.Select(skillId => new UserSkill(userId, skillId)).ToList();
+
+            await _context.AddRangeAsync(userSkills);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task Update(User user)
         {
