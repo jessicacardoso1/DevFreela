@@ -1,5 +1,6 @@
 ﻿using DevFreela.Application.Models;
 using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using System;
@@ -13,12 +14,15 @@ namespace DevFreela.Application.Commands.InsertUser
     public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewModel<int>>
     {
         private readonly IUserRepository _repository;
-        public InsertUserHandler(IUserRepository repository)
+        private readonly IAuthService _authService;
+        public InsertUserHandler(IUserRepository repository, IAuthService authService)
         {
             _repository = repository;
+            _authService = authService;
         }
         public async Task<ResultViewModel<int>> Handle(InsertUserCommand request, CancellationToken cancellationToken)
         {
+            //var passwordHash = _authService.ComputeSha256Hash(request.pas);
             var user = request.ToEntity();
 
             await _repository.Add(user);
