@@ -1,5 +1,7 @@
 ﻿using DevFreela.Application.Commands.InsertProject;
 using DevFreela.Application.Models;
+using DevFreela.Core.Services;
+using DevFreela.Infrastructure.Auth;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -24,7 +26,7 @@ namespace DevFreela.Application
             config.RegisterServicesFromAssemblyContaining<InsertProjectCommand>());
 
             services.AddTransient<IPipelineBehavior<InsertProjectCommand, ResultViewModel<int>>, ValidateInsertProjectCommandBehavior>();
-
+            services.AddScoped<IAuthService, AuthService>();
             return services;
         }
 
