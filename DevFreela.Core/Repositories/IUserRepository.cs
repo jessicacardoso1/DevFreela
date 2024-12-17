@@ -10,5 +10,6 @@ namespace DevFreela.Core.Repositories
         Task PostSkills(int userId, List<int> skillIds);
         Task Update(User user);
         Task<bool> Exists(int id);
+        Task<User> GetUserByEmailAndPassordAsync(string email, string passwordHash);
     }
 }
