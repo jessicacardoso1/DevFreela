@@ -15,11 +15,14 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using DevFreela.Application.Queries.GetUserById;
 using DevFreela.Application.Queries.GetAllProjects;
 using DevFreela.Application.Queries.GetAllUsers;
+using DevFreela.Application.Commands.LoginUser;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DevFreela.API.Controllers
 {
     [ApiController]
     [Route("api/users")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -29,6 +32,7 @@ namespace DevFreela.API.Controllers
             _mediator = mediator;
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(InsertUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -101,6 +105,20 @@ namespace DevFreela.API.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPut("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(result);
         }
 
     }
